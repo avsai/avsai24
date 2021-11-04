@@ -1,0 +1,52 @@
+import sqlite3
+
+conn = sqlite3.connect('mulsoft.db')
+
+cursor = conn.cursor()
+
+cursor.execute("DROP TABLE IF EXISTS MOVIE")
+
+sql ='''CREATE TABLE MOVIE(
+   MOVIE_NAME CHAR(20) NOT NULL,
+   HERO CHAR(20),
+   HEROINE CHAR(20),
+   DIRECTOR CHAR(20),
+   YEAR INT
+)'''
+cursor.execute(sql)
+print("Table created successfully........")
+
+
+cursor.execute('''INSERT INTO MOVIE(
+   MOVIE_NAME, HERO, HEROINE, DIRECTOR, YEAR) VALUES 
+   ('Bahubali', 'Prabhas', 'Tamanna', 'Rajamouli', 2018)''')
+
+cursor.execute('''INSERT INTO MOVIE(
+   MOVIE_NAME, HERO, HEROINE, DIRECTOR, YEAR) VALUES 
+   ('Pushpa', 'Allu arjun','Rashmika', 'Sukumar', 2022)''')
+
+cursor.execute('''INSERT INTO MOVIE(
+   MOVIE_NAME, HERO, HEROINE, DIRECTOR, YEAR) VALUES 
+   ('RRR', 'Jr.NTR', 'Alia butt', 'Rajamouli', 2021)''')
+
+cursor.execute('''INSERT INTO MOVIE(
+   MOVIE_NAME, HERO, HEROINE, DIRECTOR, YEAR) VALUES 
+   ('Srimanthudu', 'Mahesh', 'Sruthi hassan', 'Vamsi paidipalli', 2017)''')
+
+cursor.execute('''INSERT INTO MOVIE(
+   MOVIE_NAME, HERO, HEROINE, DIRECTOR, YEAR) VALUES 
+   ('Vakeel saab', 'Pawan kalyan', 'Anjali', 'Vinayak', 2019)''')
+conn.commit()
+print("Records inserted........")
+
+cursor.execute("SELECT * from MOVIE ORDER BY YEAR")
+
+result = cursor.fetchone();
+print(result)
+
+result = cursor.fetchall();
+print(result)
+
+conn.commit()
+
+conn.close()
